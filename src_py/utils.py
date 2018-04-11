@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import os, sys, torch
 
 def show_image(image):
     dpi = 80
@@ -6,3 +7,6 @@ def show_image(image):
     fig = plt.figure(figsize=figsize); 
     plt.imshow(image);
     fig.show()
+
+def get_file_name(filepath):
+    return os.path.basename(filepath).split('.')[0]
