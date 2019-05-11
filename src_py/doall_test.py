@@ -10,7 +10,7 @@ from tqdm import tqdm
 from model import resnet6
 import scipy.io as sio
 
-pretrained_model = "../scratch/sysu_mm01/deepzeropadding-08Apr2018-164359_deep-zero-padding/deep_zero_model#190.pth"
+pretrained_model = "../scratch/sysu_mm01/deepzeropadding-10May2019-195132_deep-zero-padding/deep_zero_model#80.pth"
 # init the settings
 settings.init_settings(False, pretrained_model)
 # init the log
