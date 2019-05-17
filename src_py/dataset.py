@@ -242,6 +242,7 @@ class TestDataset(Dataset):
         # img path, ID, category(rgb or IR), cam name
         img = read_image_of_category(config[0], config[2])
         img = self.pad_zeros_by_category(img, config[2])
+ 
         return torch.from_numpy(img.transpose((2, 0, 1)))
 
     def order_file_names(self, instances):

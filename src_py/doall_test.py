@@ -10,11 +10,7 @@ from tqdm import tqdm
 from model import resnet6
 import scipy.io as sio
 
-<<<<<<< HEAD
-pretrained_model = "../scratch/sysu_mm01/deepzeropadding-10May2019-191226_deep-zero-padding/deep_zero_model#1.pth"
-=======
-pretrained_model = "../scratch/sysu_mm01/deepzeropadding-10May2019-195132_deep-zero-padding/deep_zero_model#80.pth"
->>>>>>> 024899c9b355a7c162769e6b9cde27d627b2ba23
+pretrained_model = "../scratch/sysu_mm01/deepzeropadding-14May2019-125214_deep-zero-padding/deep_zero_model#156.pth"
 # init the settings
 
 settings.init_settings(False, pretrained_model)
@@ -48,12 +44,25 @@ def test(model, test_dataset, test_ids):
         model = model.cuda()
 
     for cam_name, id_contents in data_instances.items():
+        # data_instances
+        #  --cam1
+        #      -- 0001
+        #           -- 0001.jpg
+        #           -- 0002.jpg
+        #           -- ...
         matfile_path = os.path.join(
             testresults_dir, matfile_prefix + "_" + cam_name + ".mat"
         )
+        print(cam_name)
+        
+        # prepare empty features for all the person ids upto max_test_id
+        # in the feature_original, features wrt all the images from all ids are extracted regardless 
+        # of whether it is a test subject or not
+        # but this script only extracts the features for test subjects, that too only upto max_test_id (cam3 contains 533 ids, but 333 is the max test id)
+        # other ids within 333 will have empty features (shape = (0,0))
         cam_features = prepare_empty_matfile_config(max_test_id)
 
-        for id_, img_contents in id_contents.items():
+        for id_, img_contents in tqdm(id_contents.items()):
             all_current_id_features = np.empty(shape=[0, 2048])
             for img_config in img_contents:
                 #print(img_config)
