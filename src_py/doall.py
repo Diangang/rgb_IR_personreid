@@ -8,6 +8,7 @@ import torch.optim as optim
 from utils import *
 from tqdm import tqdm
 from model import resnet6
+ 
 
 force_new_model = True
 pretrained_model = None
